@@ -10,9 +10,9 @@ macro(ADD_PROJECT_FILTERS path input_list prepend)
   endforeach()
 endmacro()
 
-set(CMAKE_CXX_STANDARD 17)
 add_definitions(-DUNICODE)
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/MP>")
+set(CMAKE_CXX_STANDARD 17)
 set_property(GLOBAL PROPERTY CMAKE_CXX_STANDARD_REQUIRED ON)
 set_property(GLOBAL PROPERTY CMAKE_CXX_EXTENSIONS OFF)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -32,6 +32,7 @@ file(GLOB_RECURSE SRC SRC_DIR
     "*.hpp")
 
 add_library(RapidXMLLib INTERFACE ${SRC})
+target_compile_features(RapidXMLLib PRIVATE cxx_std_17)
 target_include_directories(RapidXMLLib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 ADD_PROJECT_FILTERS(${SRC_DIR} SRC Source)
